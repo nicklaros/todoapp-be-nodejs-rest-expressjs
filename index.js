@@ -4,6 +4,7 @@ import express from 'express';
 const app = express();
 
 // Menentukan port yang akan dipakai oleh aplikasi express untuk menerima request.
+// Pastikan port ini sedang tidak terpakai oleh aplikasi lain.
 const port = 3000;
 
 // Membuat default endpoint supaya mengembalikan pesan: halo temen2!.
