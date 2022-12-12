@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/nicklaros/todoapp-be-nodejs-rest-expressjs#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
   },
   "type": "module"
 }
