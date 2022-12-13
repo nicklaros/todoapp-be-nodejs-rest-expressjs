@@ -48,6 +48,21 @@ class Todo {
   remove(id) {
     return this.repository.delete(id);
   }
+
+  // Ubah todo.
+  update(id, name) {
+    const todo = this.repository.get(id);
+
+    if (!todo) {
+      return TodoNotFoundError;
+    }
+
+    return this.repository.update({
+      id,
+      name,
+      is_completed: todo.is_completed,
+    });
+  }
 }
 
 export default Todo;

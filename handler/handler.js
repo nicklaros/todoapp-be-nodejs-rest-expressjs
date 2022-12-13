@@ -58,9 +58,24 @@ const remove = (req, res, next) => {
   });
 };
 
+const update = (req, res, next) => {
+  const service = req.app.get("service");
+
+  const error = service.update(req.params.id, req.body.name);
+
+  if (error) {
+    return next(error);
+  }
+
+  res.json({
+    error: null,
+  });
+};
+
 export default {
   create,
   list,
   toggle,
   remove,
+  update,
 };

@@ -35,6 +35,9 @@ app.post("/todos/:id/toggle", handler.toggle);
 // Daftarkan endpoint untuk menghapus todo.
 app.delete("/todos/:id", handler.remove);
 
+// Daftarkan endpoint untuk mengubah todo.
+app.put("/todos/:id", handler.update);
+
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.
 app.use(middleware.errorHandler);
