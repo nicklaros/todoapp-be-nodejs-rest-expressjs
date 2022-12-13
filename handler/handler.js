@@ -2,6 +2,10 @@
 const create = (req, res) => {
   const service = req.app.get("service");
 
+  // Ambil nama todo baru dari body payload-nya request.
+  //
+  // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
+  // untuk membacanya.
   service.create(req.body.name);
 
   res.json({
