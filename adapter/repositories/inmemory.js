@@ -12,8 +12,20 @@ class InMemory {
   }
 
   // Cari todo yang tersimpan.
-  search() {
-    return this.todos;
+  search(filter) {
+    if (!filter) {
+      return this.todos;
+    }
+
+    let result = this.todos;
+
+    if (filter.name) {
+      result = result.filter((todo) => {
+        return todo.name === filter.name;
+      });
+    }
+
+    return result;
   }
 
   // Ambil todo dengan id spesifik.

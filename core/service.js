@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { TodoNotFoundError } from "./ports/error.js";
+import { DuplicateTodoError, TodoNotFoundError } from "./ports/error.js";
 
 class Todo {
   constructor(repository) {
@@ -9,6 +9,14 @@ class Todo {
 
   // Buat todo baru.
   create(name) {
+    const existingTodos = this.repository.search({
+      name,
+    });
+
+    if (existingTodos.length > 0) {
+      return DuplicateTodoError;
+    }
+
     return this.repository.insert({
       id: uuidv4(),
       name,

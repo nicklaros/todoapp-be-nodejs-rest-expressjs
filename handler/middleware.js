@@ -1,4 +1,7 @@
-import AppError, { TODO_NOT_FOUND_ERROR_NAME } from "../core/ports/error.js";
+import AppError, {
+  DUPLICATE_TODO_ERROR_NAME,
+  TODO_NOT_FOUND_ERROR_NAME,
+} from "../core/ports/error.js";
 
 const errorHandler = (error, req, res, next) => {
   // Default ke 500 server error ketika error tidak dikenali.
@@ -8,13 +11,24 @@ const errorHandler = (error, req, res, next) => {
   };
 
   if (error instanceof AppError) {
-    const clientErrors404 = [TODO_NOT_FOUND_ERROR_NAME];
+    const clientErrorsMapByStatusCode = {
+      400: [DUPLICATE_TODO_ERROR_NAME],
+      404: [TODO_NOT_FOUND_ERROR_NAME],
+    };
 
-    if (clientErrors404.includes(error.name)) {
-      returnedError = {
-        statusCode: 404,
-        errorMessage: error.message,
-      };
+    const statusCodes = Object.keys(clientErrorsMapByStatusCode);
+
+    for (let i = 0; i < statusCodes.length; i++) {
+      const statusCode = statusCodes[i];
+
+      if (clientErrorsMapByStatusCode[statusCode].includes(error.name)) {
+        returnedError = {
+          statusCode: parseInt(statusCode),
+          errorMessage: error.message,
+        };
+
+        break;
+      }
     }
   }
 
