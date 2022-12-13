@@ -1,5 +1,6 @@
 import express from "express";
-import TodoRepository from "./adapter/repositories/inmemory.js";
+import InMemoryTodoRepository from "./adapter/repositories/inmemory.js";
+import SQLiteTodoRepository from "./adapter/repositories/sqlite.js";
 import TodoService from "./core/service.js";
 import handler from "./handler/handler.js";
 import middleware from "./handler/middleware.js";
@@ -15,7 +16,8 @@ const port = 3000;
 app.use(express.json());
 
 // Membuat repository todo.
-const repository = new TodoRepository();
+// const repository = new InMemoryTodoRepository();
+const repository = new SQLiteTodoRepository();
 
 // Membuat service todo.
 const service = new TodoService(repository);

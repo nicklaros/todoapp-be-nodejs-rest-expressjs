@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/nicklaros/todoapp-be-nodejs-rest-expressjs#readme",
   "dependencies": {
+    "better-sqlite3": "^8.0.1",
     "express": "^4.18.2",
+    "knex": "^2.3.0",
     "uuid": "^9.0.0"
   },
   "type": "module"
