@@ -19,6 +19,21 @@ class Todo {
   list() {
     return this.repository.search();
   }
+
+  // Tandai todo sebagai selesai atau belum selesai.
+  toggle(id) {
+    const todo = this.repository.get(id);
+
+    if (!todo) {
+      return new Error("todo not found");
+    }
+
+    return this.repository.update({
+      id,
+      name: todo.name,
+      is_completed: !todo.is_completed,
+    });
+  }
 }
 
 export default Todo;

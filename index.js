@@ -1,6 +1,6 @@
 import express from "express";
 import TodoRepository from "./adapter/repositories/inmemory.js";
-import TodoService from "./core/service/service.js";
+import TodoService from "./core/service.js";
 import handler from "./handler/handler.js";
 
 // Membuat aplikasi express.

@@ -5,7 +5,7 @@ const create = (req, res) => {
   service.create(req.body.name);
 
   res.json({
-    errors: null,
+    error: null,
   });
 };
 
