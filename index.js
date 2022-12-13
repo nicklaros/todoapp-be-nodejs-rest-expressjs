@@ -2,6 +2,7 @@ import express from "express";
 import TodoRepository from "./adapter/repositories/inmemory.js";
 import TodoService from "./core/service.js";
 import handler from "./handler/handler.js";
+import middleware from "./handler/middleware.js";
 
 // Membuat aplikasi express.
 const app = express();
@@ -30,6 +31,10 @@ app.get("/todos", handler.list);
 
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
 app.post("/todos/:id/toggle", handler.toggle);
+
+// Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
+// memutuskan tipe error apa yang akan dikembalikan ke API client.
+app.use(middleware.errorHandler);
 
 // Mulai menerima request di port yang kita tentukan diatas,
 // kemudian menampilkan pesan di console ketika semuanya sudah siap.
