@@ -6,7 +6,7 @@ const create = async (req, res, next) => {
   //
   // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
   // untuk membacanya.
-  const error = await service.create(req.body.name);
+  const error = await service.create(req.body.name).catch((err) => err);
 
   if (error) {
     return next(error);
@@ -33,7 +33,7 @@ const toggle = async (req, res, next) => {
   const service = req.app.get("service");
 
   // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
-  const error = await service.toggle(req.params.id);
+  const error = await service.toggle(req.params.id).catch((err) => err);
 
   if (error) {
     return next(error);
@@ -47,7 +47,7 @@ const toggle = async (req, res, next) => {
 const remove = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = await service.remove(req.params.id);
+  const error = await service.remove(req.params.id).catch((err) => err);
 
   if (error) {
     return next(error);
@@ -61,7 +61,9 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = await service.update(req.params.id, req.body.name);
+  const error = await service
+    .update(req.params.id, req.body.name)
+    .catch((err) => err);
 
   if (error) {
     return next(error);

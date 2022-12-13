@@ -7,11 +7,15 @@ class InMemory {
   }
 
   // Simpan todo baru ke repository.
+  //
+  // Return void.
   async insert(todo) {
     this.todos.push(todo);
   }
 
-  // Cari todo yang tersimpan.
+  // Cari todo yang tersimpan berdasarkan filter.
+  //
+  // Return array of todos.
   async search(filter) {
     if (!filter) {
       return this.todos;
@@ -29,6 +33,8 @@ class InMemory {
   }
 
   // Ambil todo dengan id spesifik.
+  //
+  // Return satu todo yang cocok dengan id atau undefined ketika todo tidak ditemukan.
   async get(id) {
     return this.todos.find((todo) => {
       return todo.id === id;
@@ -36,22 +42,26 @@ class InMemory {
   }
 
   // Ubah data todo.
+  //
+  // Return void.
   async update(updatedTodo) {
     const updatedTodoIndex = this.#getIndex(updatedTodo.id);
 
     if (updatedTodoIndex < 0) {
-      return TodoNotFoundError;
+      throw TodoNotFoundError;
     }
 
     this.todos[updatedTodoIndex] = updatedTodo;
   }
 
   // Hapus todo dengan id spesifik.
+  //
+  // Return void.
   async delete(id) {
     const deletedTodoIndex = this.#getIndex(id);
 
     if (deletedTodoIndex < 0) {
-      return TodoNotFoundError;
+      throw TodoNotFoundError;
     }
 
     this.todos.splice(deletedTodoIndex, 1);

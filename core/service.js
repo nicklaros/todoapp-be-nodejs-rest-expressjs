@@ -8,16 +8,18 @@ class Todo {
   }
 
   // Buat todo baru.
+  //
+  // Return void.
   async create(name) {
     const existingTodos = await this.repository.search({
       name,
     });
 
     if (existingTodos.length > 0) {
-      return DuplicateTodoError;
+      throw DuplicateTodoError;
     }
 
-    return this.repository.insert({
+    await this.repository.insert({
       id: uuidv4(),
       name,
       is_completed: false,
@@ -25,19 +27,23 @@ class Todo {
   }
 
   // Ambil daftar todo.
+  //
+  // Return array of todos.
   async list() {
     return this.repository.search();
   }
 
   // Tandai todo sebagai selesai atau belum selesai.
+  //
+  // Return void.
   async toggle(id) {
     const todo = await this.repository.get(id);
 
     if (!todo) {
-      return TodoNotFoundError;
+      throw TodoNotFoundError;
     }
 
-    return this.repository.update({
+    await this.repository.update({
       id,
       name: todo.name,
       is_completed: !todo.is_completed,
@@ -45,19 +51,33 @@ class Todo {
   }
 
   // Hapus todo.
+  //
+  // Return void.
   async remove(id) {
-    return this.repository.delete(id);
+    await this.repository.delete(id);
   }
 
   // Ubah todo.
+  //
+  // Return void.
   async update(id, name) {
     const todo = await this.repository.get(id);
 
     if (!todo) {
-      return TodoNotFoundError;
+      throw TodoNotFoundError;
     }
 
-    return this.repository.update({
+    if (todo.name !== name) {
+      const existingTodos = await this.repository.search({
+        name,
+      });
+
+      if (existingTodos.length > 0) {
+        throw DuplicateTodoError;
+      }
+    }
+
+    await this.repository.update({
       id,
       name,
       is_completed: todo.is_completed,
