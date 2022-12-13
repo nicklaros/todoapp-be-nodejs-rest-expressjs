@@ -29,7 +29,7 @@ app.post("/todos", handler.create);
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
 app.get("/todos", handler.list);
 
-// Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
+// Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
 app.post("/todos/:id/toggle", handler.toggle);
 
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
