@@ -28,6 +28,9 @@ app.post("/todos", handler.create);
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
 app.get("/todos", handler.list);
 
+// Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
+app.post("/todos/:id/toggle", handler.toggle);
+
 // Mulai menerima request di port yang kita tentukan diatas,
 // kemudian menampilkan pesan di console ketika semuanya sudah siap.
 app.listen(port, () => {

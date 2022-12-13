@@ -13,6 +13,26 @@ class InMemory {
   search() {
     return this.todos;
   }
+
+  // Ambil todo dengan id spesifik.
+  get(id) {
+    return this.todos.find((todo) => {
+      return todo.id === id;
+    });
+  }
+
+  // Ubah data todo.
+  update(updatedTodo) {
+    const updatedTodoIndex = this.todos.findIndex((todo) => {
+      return todo.id === updatedTodo.id;
+    });
+
+    if (updatedTodoIndex < 0) {
+      return new Error("todo not found");
+    }
+
+    this.todos[updatedTodoIndex] = updatedTodo;
+  }
 }
 
 export default InMemory;

@@ -24,7 +24,20 @@ const list = (req, res) => {
   });
 };
 
+// Handler untuk menandai todo sebagai selesai atau belum selesai.
+const toggle = (req, res) => {
+  const service = req.app.get("service");
+
+  // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
+  const error = service.toggle(req.params.id);
+
+  res.json({
+    error: error ? error.message : null,
+  });
+};
+
 export default {
   create,
   list,
+  toggle,
 };
