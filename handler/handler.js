@@ -44,8 +44,23 @@ const toggle = (req, res, next) => {
   });
 };
 
+const remove = (req, res, next) => {
+  const service = req.app.get("service");
+
+  const error = service.remove(req.params.id);
+
+  if (error) {
+    return next(error);
+  }
+
+  res.json({
+    error: null,
+  });
+};
+
 export default {
   create,
   list,
   toggle,
+  remove,
 };

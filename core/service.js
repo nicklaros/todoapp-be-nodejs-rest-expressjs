@@ -43,6 +43,11 @@ class Todo {
       is_completed: !todo.is_completed,
     });
   }
+
+  // Hapus todo.
+  remove(id) {
+    return this.repository.delete(id);
+  }
 }
 
 export default Todo;

@@ -37,15 +37,30 @@ class InMemory {
 
   // Ubah data todo.
   update(updatedTodo) {
-    const updatedTodoIndex = this.todos.findIndex((todo) => {
-      return todo.id === updatedTodo.id;
-    });
+    const updatedTodoIndex = this.#getIndex(updatedTodo.id);
 
     if (updatedTodoIndex < 0) {
       return TodoNotFoundError;
     }
 
     this.todos[updatedTodoIndex] = updatedTodo;
+  }
+
+  // Hapus todo dengan id spesifik.
+  delete(id) {
+    const deletedTodoIndex = this.#getIndex(id);
+
+    if (deletedTodoIndex < 0) {
+      return TodoNotFoundError;
+    }
+
+    this.todos.splice(deletedTodoIndex, 1);
+  }
+
+  #getIndex(id) {
+    return this.todos.findIndex((todo) => {
+      return todo.id === id;
+    });
   }
 }
 

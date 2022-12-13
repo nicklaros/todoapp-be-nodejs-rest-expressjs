@@ -32,6 +32,9 @@ app.get("/todos", handler.list);
 // Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
 app.post("/todos/:id/toggle", handler.toggle);
 
+// Daftarkan endpoint untuk menghapus todo.
+app.delete("/todos/:id", handler.remove);
+
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.
 app.use(middleware.errorHandler);
