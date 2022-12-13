@@ -1,12 +1,12 @@
 // Handler untuk membuat todo baru.
-const create = (req, res, next) => {
+const create = async (req, res, next) => {
   const service = req.app.get("service");
 
   // Ambil nama todo baru dari body payload-nya request.
   //
   // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
   // untuk membacanya.
-  const error = service.create(req.body.name);
+  const error = await service.create(req.body.name);
 
   if (error) {
     return next(error);
@@ -18,10 +18,10 @@ const create = (req, res, next) => {
 };
 
 // Handler untuk mengambil daftar todo.
-const list = (req, res) => {
+const list = async (req, res) => {
   const service = req.app.get("service");
 
-  const todos = service.list();
+  const todos = await service.list();
 
   res.json({
     todos,
@@ -29,11 +29,11 @@ const list = (req, res) => {
 };
 
 // Handler untuk menandai todo sebagai selesai atau belum selesai.
-const toggle = (req, res, next) => {
+const toggle = async (req, res, next) => {
   const service = req.app.get("service");
 
   // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
-  const error = service.toggle(req.params.id);
+  const error = await service.toggle(req.params.id);
 
   if (error) {
     return next(error);
@@ -44,10 +44,10 @@ const toggle = (req, res, next) => {
   });
 };
 
-const remove = (req, res, next) => {
+const remove = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = service.remove(req.params.id);
+  const error = await service.remove(req.params.id);
 
   if (error) {
     return next(error);
@@ -58,10 +58,10 @@ const remove = (req, res, next) => {
   });
 };
 
-const update = (req, res, next) => {
+const update = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = service.update(req.params.id, req.body.name);
+  const error = await service.update(req.params.id, req.body.name);
 
   if (error) {
     return next(error);

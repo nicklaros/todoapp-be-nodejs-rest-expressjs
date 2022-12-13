@@ -8,8 +8,8 @@ class Todo {
   }
 
   // Buat todo baru.
-  create(name) {
-    const existingTodos = this.repository.search({
+  async create(name) {
+    const existingTodos = await this.repository.search({
       name,
     });
 
@@ -25,13 +25,13 @@ class Todo {
   }
 
   // Ambil daftar todo.
-  list() {
+  async list() {
     return this.repository.search();
   }
 
   // Tandai todo sebagai selesai atau belum selesai.
-  toggle(id) {
-    const todo = this.repository.get(id);
+  async toggle(id) {
+    const todo = await this.repository.get(id);
 
     if (!todo) {
       return TodoNotFoundError;
@@ -45,13 +45,13 @@ class Todo {
   }
 
   // Hapus todo.
-  remove(id) {
+  async remove(id) {
     return this.repository.delete(id);
   }
 
   // Ubah todo.
-  update(id, name) {
-    const todo = this.repository.get(id);
+  async update(id, name) {
+    const todo = await this.repository.get(id);
 
     if (!todo) {
       return TodoNotFoundError;
