@@ -1,3 +1,5 @@
+import { TodoNotFoundError } from "../../core/ports/error.js";
+
 class InMemory {
   constructor() {
     // Untuk menampung semua todo.
@@ -28,7 +30,7 @@ class InMemory {
     });
 
     if (updatedTodoIndex < 0) {
-      return new Error("todo not found");
+      return TodoNotFoundError;
     }
 
     this.todos[updatedTodoIndex] = updatedTodo;

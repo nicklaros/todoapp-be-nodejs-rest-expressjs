@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import { TodoNotFoundError } from "./ports/error.js";
 
 class Todo {
   constructor(repository) {
@@ -25,7 +26,7 @@ class Todo {
     const todo = this.repository.get(id);
 
     if (!todo) {
-      return new Error("todo not found");
+      return TodoNotFoundError;
     }
 
     return this.repository.update({
