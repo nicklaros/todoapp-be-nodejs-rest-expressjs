@@ -1,5 +1,5 @@
 // Handler untuk membuat todo baru.
-const create = async (req, res, next) => {
+const createHandler = async (req, res, next) => {
   const service = req.app.get("service");
 
   try {
@@ -8,7 +8,7 @@ const create = async (req, res, next) => {
     // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
     // untuk membacanya.
     await service.create(req.body.name);
-  } catch (err) {
+  } catch (error) {
     return next(error);
   }
 
@@ -18,7 +18,7 @@ const create = async (req, res, next) => {
 };
 
 // Handler untuk mengambil daftar todo.
-const list = async (req, res) => {
+const listHandler = async (req, res) => {
   const service = req.app.get("service");
 
   const todos = await service.list();
@@ -29,7 +29,7 @@ const list = async (req, res) => {
 };
 
 // Handler untuk menandai todo sebagai selesai atau belum selesai.
-const toggle = async (req, res, next) => {
+const toggleHandler = async (req, res, next) => {
   const service = req.app.get("service");
 
   try {
@@ -44,12 +44,12 @@ const toggle = async (req, res, next) => {
   });
 };
 
-const remove = async (req, res, next) => {
+const deleteHandler = async (req, res, next) => {
   const service = req.app.get("service");
 
   try {
-    await service.remove(req.params.id).catch((err) => err);
-  } catch (err) {
+    await service.delete(req.params.id);
+  } catch (error) {
     return next(error);
   }
 
@@ -58,12 +58,12 @@ const remove = async (req, res, next) => {
   });
 };
 
-const update = async (req, res, next) => {
+const updateHandler = async (req, res, next) => {
   const service = req.app.get("service");
 
   try {
     await service.update(req.params.id, req.body.name);
-  } catch (err) {
+  } catch (error) {
     return next(error);
   }
 
@@ -73,9 +73,9 @@ const update = async (req, res, next) => {
 };
 
 export default {
-  create,
-  list,
-  toggle,
-  remove,
-  update,
+  createHandler,
+  listHandler,
+  toggleHandler,
+  deleteHandler,
+  updateHandler,
 };

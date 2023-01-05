@@ -11,7 +11,7 @@ class Todo {
   //
   // Return void.
   async create(name) {
-    const existingTodos = await this.repository.search({
+    const existingTodos = await this.repository.list({
       name,
     });
 
@@ -19,7 +19,7 @@ class Todo {
       throw DuplicateTodoError;
     }
 
-    await this.repository.insert({
+    await this.repository.create({
       id: uuidv4(),
       name,
       is_completed: false,
@@ -30,7 +30,7 @@ class Todo {
   //
   // Return array of todos.
   async list() {
-    return this.repository.search();
+    return this.repository.list();
   }
 
   // Tandai todo sebagai selesai atau belum selesai.
@@ -53,7 +53,7 @@ class Todo {
   // Hapus todo.
   //
   // Return void.
-  async remove(id) {
+  async delete(id) {
     await this.repository.delete(id);
   }
 
@@ -68,7 +68,7 @@ class Todo {
     }
 
     if (todo.name !== name) {
-      const existingTodos = await this.repository.search({
+      const existingTodos = await this.repository.list({
         name,
       });
 

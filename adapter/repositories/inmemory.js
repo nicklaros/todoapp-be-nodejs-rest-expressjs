@@ -9,14 +9,14 @@ class InMemory {
   // Simpan todo baru ke repository.
   //
   // Return void.
-  async insert(todo) {
+  async create(todo) {
     this.todos.push(todo);
   }
 
   // Cari todo yang tersimpan berdasarkan filter.
   //
   // Return array of todos.
-  async search(filter) {
+  async list(filter) {
     if (!filter) {
       return this.todos;
     }

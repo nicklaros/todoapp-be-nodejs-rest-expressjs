@@ -26,19 +26,19 @@ const service = new TodoService(repository);
 app.set("service", service);
 
 // Daftarkan endpoint untuk menambahkan todo baru.
-app.post("/todos", handler.create);
+app.post("/todos", handler.createHandler);
 
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
-app.get("/todos", handler.list);
+app.get("/todos", handler.listHandler);
 
 // Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
-app.post("/todos/:id/toggle", handler.toggle);
+app.post("/todos/:id/toggle", handler.toggleHandler);
 
 // Daftarkan endpoint untuk menghapus todo.
-app.delete("/todos/:id", handler.remove);
+app.delete("/todos/:id", handler.deleteHandler);
 
 // Daftarkan endpoint untuk mengubah todo.
-app.put("/todos/:id", handler.update);
+app.put("/todos/:id", handler.updateHandler);
 
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.

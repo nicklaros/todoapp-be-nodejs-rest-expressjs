@@ -17,7 +17,7 @@ class SQLite {
   // Simpan todo baru ke repository.
   //
   // Return void.
-  async insert(todo) {
+  async create(todo) {
     await this.dbClient
       .table("todos")
       .insert(todo)
@@ -31,10 +31,10 @@ class SQLite {
       });
   }
 
-  // Cari todo yang tersimpan.
+  // Cari todo yang tersimpan berdasarkan filter.
   //
   // Return array of todos.
-  async search(filter) {
+  async list(filter) {
     const queryBuilder = this.dbClient.table("todos");
 
     if (filter?.name) {
