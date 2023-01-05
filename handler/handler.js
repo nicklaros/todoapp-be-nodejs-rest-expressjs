@@ -2,13 +2,13 @@
 const create = async (req, res, next) => {
   const service = req.app.get("service");
 
-  // Ambil nama todo baru dari body payload-nya request.
-  //
-  // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
-  // untuk membacanya.
-  const error = await service.create(req.body.name).catch((err) => err);
-
-  if (error) {
+  try {
+    // Ambil nama todo baru dari body payload-nya request.
+    //
+    // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
+    // untuk membacanya.
+    await service.create(req.body.name);
+  } catch (err) {
     return next(error);
   }
 
@@ -32,10 +32,10 @@ const list = async (req, res) => {
 const toggle = async (req, res, next) => {
   const service = req.app.get("service");
 
-  // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
-  const error = await service.toggle(req.params.id).catch((err) => err);
-
-  if (error) {
+  try {
+    // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
+    await service.toggle(req.params.id);
+  } catch (error) {
     return next(error);
   }
 
@@ -47,9 +47,9 @@ const toggle = async (req, res, next) => {
 const remove = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = await service.remove(req.params.id).catch((err) => err);
-
-  if (error) {
+  try {
+    await service.remove(req.params.id).catch((err) => err);
+  } catch (err) {
     return next(error);
   }
 
@@ -61,11 +61,9 @@ const remove = async (req, res, next) => {
 const update = async (req, res, next) => {
   const service = req.app.get("service");
 
-  const error = await service
-    .update(req.params.id, req.body.name)
-    .catch((err) => err);
-
-  if (error) {
+  try {
+    await service.update(req.params.id, req.body.name);
+  } catch (err) {
     return next(error);
   }
 
