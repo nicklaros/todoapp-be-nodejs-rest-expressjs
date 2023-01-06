@@ -1,9 +1,9 @@
 import express from "express";
-import InMemoryTodoRepository from "./adapter/repositories/inmemory.js";
-import SQLiteTodoRepository from "./adapter/repositories/sqlite.js";
-import TodoService from "./core/service.js";
-import handler from "./handler/handler.js";
-import middleware from "./handler/middleware.js";
+import InMemoryTodoRepository from "../adapter/repositories/inmemory.js";
+import SQLiteTodoRepository from "../adapter/repositories/sqlite.js";
+import TodoService from "../core/service.js";
+import handler from "./handler.js";
+import middleware from "./middleware.js";
 
 // Membuat aplikasi express.
 const app = express();
@@ -15,7 +15,7 @@ const port = 3000;
 // Untuk bisa baca json payload.
 app.use(express.json());
 
-// Membuat repository todo.
+// Membuat repository todo, kita bisa memilih antara InMemory atau SQLite.
 // const repository = new InMemoryTodoRepository();
 const repository = new SQLiteTodoRepository();
 
