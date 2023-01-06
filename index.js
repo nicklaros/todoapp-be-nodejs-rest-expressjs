@@ -32,6 +32,10 @@ app.post("/todos", handler.createHandler);
 app.get("/todos", handler.listHandler);
 
 // Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
+//
+// ExpressJS mempunyai fitur route parameter supaya kita bisa membuat handler
+// untuk suatu url yang dinamis, dalam hal ini url-nya bisa berubah-ubah
+// sesuai dengan id dari todo yang mau di-toggle.
 app.post("/todos/:id/toggle", handler.toggleHandler);
 
 // Daftarkan endpoint untuk menghapus todo.

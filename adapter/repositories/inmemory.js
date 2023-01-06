@@ -13,7 +13,8 @@ class InMemory {
     this.todos.push(todo);
   }
 
-  // Cari todo yang tersimpan berdasarkan filter.
+  // Cari todo yang tersimpan berdasarkan filter yang tersedia.
+  // - name: filter todo berdasarkan nama.
   //
   // Return array of todos.
   async list(filter) {

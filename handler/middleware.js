@@ -16,11 +16,7 @@ const errorHandler = (error, req, res, next) => {
       404: [TODO_NOT_FOUND_ERROR_NAME],
     };
 
-    const statusCodes = Object.keys(clientErrorsMapByStatusCode);
-
-    for (let i = 0; i < statusCodes.length; i++) {
-      const statusCode = statusCodes[i];
-
+    for (const statusCode in clientErrorsMapByStatusCode) {
       if (clientErrorsMapByStatusCode[statusCode].includes(error.name)) {
         returnedError = {
           statusCode: parseInt(statusCode),

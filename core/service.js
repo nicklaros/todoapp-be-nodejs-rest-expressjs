@@ -69,14 +69,18 @@ class Todo {
       throw TodoNotFoundError;
     }
 
-    if (todo.name !== name) {
-      const existingTodos = await this.repository.list({
-        name,
-      });
+    // Kalau name tidak berubah maka return tanpa mengubah apapun.
+    if (todo.name === name) {
+      return;
+    }
 
-      if (existingTodos.length > 0) {
-        throw DuplicateTodoError;
-      }
+    const existingTodos = await this.repository.list({
+      name,
+    });
+
+    // Apabila ada todo lain dengan nama yang sama maka throw error.
+    if (existingTodos.length > 0) {
+      throw DuplicateTodoError;
     }
 
     await this.repository.update({
