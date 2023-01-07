@@ -2,7 +2,7 @@ import express from "express";
 import InMemoryTodoRepository from "../adapter/repositories/inmemory.js";
 import SQLiteTodoRepository from "../adapter/repositories/sqlite.js";
 import TodoService from "../core/impl/service.js";
-import handler from "./handler.js";
+import RouteHandler from "./handler.js";
 import middleware from "./middleware.js";
 
 // Membuat aplikasi express.
@@ -22,27 +22,27 @@ const repository = new SQLiteTodoRepository();
 // Membuat service todo.
 const service = new TodoService(repository);
 
-// Masukkan service kedalam aplikasi express supaya bisa di akses dari route handler.
-app.set("service", service);
+// Membuat route handler.
+const routeHandler = new RouteHandler(service);
 
 // Daftarkan endpoint untuk menambahkan todo baru.
-app.post("/todos", handler.createHandler);
+app.post("/todos", (...args) => routeHandler.createHandler(...args));
 
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
-app.get("/todos", handler.listHandler);
+app.get("/todos", (...args) => routeHandler.listHandler(...args));
 
 // Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
 //
 // ExpressJS mempunyai fitur route parameter supaya kita bisa membuat handler
 // untuk suatu url yang dinamis, dalam hal ini url-nya bisa berubah-ubah
 // sesuai dengan id dari todo yang mau di-toggle.
-app.post("/todos/:id/toggle", handler.toggleHandler);
+app.post("/todos/:id/toggle", (...args) => routeHandler.toggleHandler(...args));
 
 // Daftarkan endpoint untuk menghapus todo.
-app.delete("/todos/:id", handler.deleteHandler);
+app.delete("/todos/:id", (...args) => routeHandler.deleteHandler(...args));
 
 // Daftarkan endpoint untuk mengubah todo.
-app.put("/todos/:id", handler.updateHandler);
+app.put("/todos/:id", (...args) => routeHandler.updateHandler(...args));
 
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.
