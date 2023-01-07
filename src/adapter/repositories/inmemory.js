@@ -1,7 +1,10 @@
 import { TodoNotFoundError } from "../../core/ports/error.js";
+import Repository from "../../core/ports/repository.js";
 
-class InMemory {
+class InMemory extends Repository {
   constructor() {
+    super();
+
     // Untuk menampung semua todo.
     this.todos = [];
   }

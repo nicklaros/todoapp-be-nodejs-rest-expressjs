@@ -1,8 +1,11 @@
 import knex from "knex";
 import { TodoNotFoundError } from "../../core/ports/error.js";
+import Repository from "../../core/ports/repository.js";
 
-class SQLite {
+class SQLite extends Repository {
   constructor() {
+    super();
+
     const dbClient = knex({
       client: "better-sqlite3",
       connection: {

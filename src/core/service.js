@@ -1,11 +1,14 @@
 import { v4 as uuidv4 } from "uuid";
 import { DuplicateTodoError, TodoNotFoundError } from "./ports/error.js";
+import AbstractService from "./ports/service.js";
 
-class Todo {
+class Todo extends AbstractService {
   // Dependency injection, kita inject repository ketika membuat Todo service.
   //
   // - repository: digunakan untuk menyimpan semua todo
   constructor(repository) {
+    super();
+
     this.repository = repository;
   }
 
