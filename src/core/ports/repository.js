@@ -1,6 +1,6 @@
-class Repository {
+class AbstractRepository {
   constructor() {
-    if (this.constructor == Repository) {
+    if (this.constructor == AbstractRepository) {
       throw new Error("Abstract classes can't be instantiated.");
     }
   }
@@ -41,4 +41,4 @@ class Repository {
   }
 }
 
-export default Repository;
+export default AbstractRepository;

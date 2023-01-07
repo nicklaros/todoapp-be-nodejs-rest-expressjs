@@ -1,7 +1,7 @@
 import express from "express";
 import InMemoryTodoRepository from "../adapter/repositories/inmemory.js";
 import SQLiteTodoRepository from "../adapter/repositories/sqlite.js";
-import TodoService from "../core/service.js";
+import TodoService from "../core/impl/service.js";
 import handler from "./handler.js";
 import middleware from "./middleware.js";
 

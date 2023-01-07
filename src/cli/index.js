@@ -1,7 +1,7 @@
 import { program } from "commander";
 import InMemoryTodoRepository from "../adapter/repositories/inmemory.js";
 import SQLiteTodoRepository from "../adapter/repositories/sqlite.js";
-import TodoService from "../core/service.js";
+import TodoService from "../core/impl/service.js";
 import Handler from "./handler.js";
 
 // Membuat repository todo, kita bisa memilih antara InMemory atau SQLite.

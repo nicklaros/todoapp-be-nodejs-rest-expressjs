@@ -1,6 +1,6 @@
-class Service {
+class AbstractService {
   constructor() {
-    if (this.constructor == Service) {
+    if (this.constructor == AbstractService) {
       throw new Error("Abstract classes can't be instantiated.");
     }
   }
@@ -41,4 +41,4 @@ class Service {
   }
 }
 
-export default Service;
+export default AbstractService;

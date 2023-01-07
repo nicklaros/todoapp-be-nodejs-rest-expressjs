@@ -1,8 +1,11 @@
 import knex from "knex";
-import { TodoNotFoundError } from "../../core/ports/error.js";
-import Repository from "../../core/ports/repository.js";
+import {
+  DuplicateTodoError,
+  TodoNotFoundError,
+} from "../../core/ports/error.js";
+import AbstractRepository from "../../core/ports/repository.js";
 
-class SQLite extends Repository {
+class SQLite extends AbstractRepository {
   constructor() {
     super();
 
@@ -27,7 +30,7 @@ class SQLite extends Repository {
       .then(() => null)
       .catch((err) => {
         if (err.code === "SQLITE_CONSTRAINT_PRIMARYKEY") {
-          throw TodoNotFoundError;
+          throw DuplicateTodoError;
         }
 
         throw err;

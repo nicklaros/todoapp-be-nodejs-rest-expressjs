@@ -1,7 +1,7 @@
 import { TodoNotFoundError } from "../../core/ports/error.js";
-import Repository from "../../core/ports/repository.js";
+import AbstractRepository from "../../core/ports/repository.js";
 
-class InMemory extends Repository {
+class InMemory extends AbstractRepository {
   constructor() {
     super();
 
