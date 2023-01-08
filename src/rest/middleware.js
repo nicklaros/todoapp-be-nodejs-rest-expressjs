@@ -28,6 +28,10 @@ const errorHandler = (error, req, res, next) => {
     }
   }
 
+  if (returnedError.statusCode >= 500) {
+    console.log("server error occured", error);
+  }
+
   // Kita bisa set response http status code menggunakan `res.status()`.
   res.status(returnedError.statusCode).json({
     error: returnedError.errorMessage,

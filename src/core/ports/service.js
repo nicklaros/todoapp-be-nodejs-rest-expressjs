@@ -26,18 +26,18 @@ class AbstractService {
     throw new Error("Method 'toggle()' must be implemented.");
   }
 
-  // Hapus todo.
-  //
-  // Return void.
-  async delete(id) {
-    throw new Error("Method 'delete()' must be implemented.");
-  }
-
   // Ubah todo.
   //
   // Return void.
   async update(id, name) {
     throw new Error("Method 'update()' must be implemented.");
+  }
+
+  // Hapus todo.
+  //
+  // Return void.
+  async delete(id) {
+    throw new Error("Method 'delete()' must be implemented.");
   }
 }
 

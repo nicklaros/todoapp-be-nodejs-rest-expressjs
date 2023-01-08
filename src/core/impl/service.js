@@ -55,13 +55,6 @@ class Service extends AbstractService {
     });
   }
 
-  // Hapus todo.
-  //
-  // Return void.
-  async delete(id) {
-    await this.repository.delete(id);
-  }
-
   // Ubah todo.
   //
   // Return void.
@@ -91,6 +84,13 @@ class Service extends AbstractService {
       name,
       is_completed: todo.is_completed,
     });
+  }
+
+  // Hapus todo.
+  //
+  // Return void.
+  async delete(id) {
+    await this.repository.delete(id);
   }
 }
 

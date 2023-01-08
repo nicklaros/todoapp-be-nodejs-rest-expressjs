@@ -38,11 +38,11 @@ app.get("/todos", (...args) => routeHandler.list(...args));
 // sesuai dengan id dari todo yang mau di-toggle.
 app.post("/todos/:id/toggle", (...args) => routeHandler.toggle(...args));
 
-// Daftarkan endpoint untuk menghapus todo.
-app.delete("/todos/:id", (...args) => routeHandler.delete(...args));
-
 // Daftarkan endpoint untuk mengubah todo.
 app.put("/todos/:id", (...args) => routeHandler.update(...args));
+
+// Daftarkan endpoint untuk menghapus todo.
+app.delete("/todos/:id", (...args) => routeHandler.delete(...args));
 
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.
