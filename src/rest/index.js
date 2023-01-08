@@ -26,23 +26,23 @@ const service = new TodoService(repository);
 const routeHandler = new RouteHandler(service);
 
 // Daftarkan endpoint untuk menambahkan todo baru.
-app.post("/todos", (...args) => routeHandler.createHandler(...args));
+app.post("/todos", (...args) => routeHandler.create(...args));
 
 // Daftarkan endpoint untuk menampilkan todos yang telah dibuat.
-app.get("/todos", (...args) => routeHandler.listHandler(...args));
+app.get("/todos", (...args) => routeHandler.list(...args));
 
 // Daftarkan endpoint untuk menandai todo sebagai selesai atau belum selesai.
 //
 // ExpressJS mempunyai fitur route parameter supaya kita bisa membuat handler
 // untuk suatu url yang dinamis, dalam hal ini url-nya bisa berubah-ubah
 // sesuai dengan id dari todo yang mau di-toggle.
-app.post("/todos/:id/toggle", (...args) => routeHandler.toggleHandler(...args));
+app.post("/todos/:id/toggle", (...args) => routeHandler.toggle(...args));
 
 // Daftarkan endpoint untuk menghapus todo.
-app.delete("/todos/:id", (...args) => routeHandler.deleteHandler(...args));
+app.delete("/todos/:id", (...args) => routeHandler.delete(...args));
 
 // Daftarkan endpoint untuk mengubah todo.
-app.put("/todos/:id", (...args) => routeHandler.updateHandler(...args));
+app.put("/todos/:id", (...args) => routeHandler.update(...args));
 
 // Pakai middleware untuk handle ketika error terjadi. Ini berguna untuk
 // memutuskan tipe error apa yang akan dikembalikan ke API client.

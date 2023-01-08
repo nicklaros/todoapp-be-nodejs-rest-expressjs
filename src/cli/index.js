@@ -12,36 +12,36 @@ const repository = new SQLiteTodoRepository();
 const service = new TodoService(repository);
 
 // Membuat cli handler.
-const handler = new Handler(service);
+const cliHandler = new Handler(service);
 
 program
   .command("new")
   .description("buat todo baru")
   .argument("<name>", "nama dari todo baru")
-  .action((name) => handler.createHandler(name));
+  .action((name) => cliHandler.create(name));
 
 program
   .command("list")
   .description("tampilkan daftar todo")
-  .action(() => handler.listHandler());
+  .action(() => cliHandler.list());
 
 program
   .command("toggle")
   .description("toggle todo")
   .argument("<id>", "id todo yang mau di-toggle")
-  .action((id) => handler.togglehandler(id));
+  .action((id) => cliHandler.toggle(id));
 
 program
   .command("delete")
   .description("hapus todo")
   .argument("<id>", "id todo yang mau di-hapus")
-  .action((id) => handler.deletehandler(id));
+  .action((id) => cliHandler.delete(id));
 
 program
   .command("update")
   .description("ubah todo")
   .argument("<id>", "id todo yang mau di-ubah")
   .argument("<name>", "nama todo")
-  .action((id, name) => handler.updateHandler(id, name));
+  .action((id, name) => cliHandler.update(id, name));
 
 program.parse();

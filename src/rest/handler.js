@@ -4,7 +4,7 @@ class Handler {
   }
 
   // Handler untuk membuat todo baru.
-  createHandler = this.#newHandlerWithExceptionCatcher(async (req, res) => {
+  create = this.#newHandlerWithExceptionCatcher(async (req, res) => {
     // Ambil nama todo baru dari body payload-nya request.
     //
     // Karna body payload dikirim dalam bentuk json maka kita perlu memakai `express.json()` middleware
@@ -19,7 +19,7 @@ class Handler {
   });
 
   // Handler untuk mengambil daftar todo.
-  listHandler = this.#newHandlerWithExceptionCatcher(async (req, res) => {
+  list = this.#newHandlerWithExceptionCatcher(async (req, res) => {
     const todos = await this.service.list();
 
     res.json({
@@ -28,7 +28,7 @@ class Handler {
   });
 
   // Handler untuk menandai todo sebagai selesai atau belum selesai.
-  toggleHandler = this.#newHandlerWithExceptionCatcher(async (req, res) => {
+  toggle = this.#newHandlerWithExceptionCatcher(async (req, res) => {
     // Ambil id todo yang di-toggle dari route parameters, semua route parameters bisa diakses melalui object `req.params`.
     await this.service.toggle(req.params.id);
 
@@ -38,7 +38,7 @@ class Handler {
   });
 
   // Handler untuk menghapus todo.
-  deleteHandler = this.#newHandlerWithExceptionCatcher(async (req, res) => {
+  delete = this.#newHandlerWithExceptionCatcher(async (req, res) => {
     await this.service.delete(req.params.id);
 
     res.json({
@@ -47,7 +47,7 @@ class Handler {
   });
 
   // Handler untuk mengubah todo.
-  updateHandler = this.#newHandlerWithExceptionCatcher(async (req, res) => {
+  update = this.#newHandlerWithExceptionCatcher(async (req, res) => {
     await this.service.update(req.params.id, req.body.name);
 
     res.json({
