@@ -18,30 +18,30 @@ program
   .command("new")
   .description("buat todo baru")
   .argument("<name>", "nama dari todo baru")
-  .action((name) => cliHandler.create(name));
+  .action((...args) => cliHandler.create(...args));
 
 program
   .command("list")
   .description("tampilkan daftar todo")
-  .action(() => cliHandler.list());
+  .action((...args) => cliHandler.list(...args));
 
 program
   .command("toggle")
   .description("toggle todo")
   .argument("<id>", "id todo yang mau di-toggle")
-  .action((id) => cliHandler.toggle(id));
+  .action((...args) => cliHandler.toggle(...args));
 
 program
   .command("delete")
   .description("hapus todo")
   .argument("<id>", "id todo yang mau di-hapus")
-  .action((id) => cliHandler.delete(id));
+  .action((...args) => cliHandler.delete(...args));
 
 program
   .command("update")
   .description("ubah todo")
   .argument("<id>", "id todo yang mau di-ubah")
   .argument("<name>", "nama todo")
-  .action((id, name) => cliHandler.update(id, name));
+  .action((...args) => cliHandler.update(...args));
 
 program.parse();

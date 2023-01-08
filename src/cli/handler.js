@@ -28,12 +28,13 @@ class Handler {
   });
 
   update = this.#newHandler(async (id, name) => {
-    console.log(id, name);
     await this.service.update(id, name);
 
     console.log("ok");
   });
 
+  // Method untuk membuat handler yang mana akan menutup program
+  // setelah selesai memproses command.
   #newHandler(handlerFunc) {
     return async (...args) => {
       await handlerFunc(...args);
