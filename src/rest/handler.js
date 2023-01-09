@@ -1,4 +1,4 @@
-class Handler {
+class RouteHandler {
   constructor(service) {
     this.service = service;
   }
@@ -67,4 +67,4 @@ class Handler {
   }
 }
 
-export default Handler;
+export default RouteHandler;

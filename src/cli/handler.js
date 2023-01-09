@@ -1,4 +1,4 @@
-class Handler {
+class CommandHandler {
   constructor(service) {
     this.service = service;
   }
@@ -44,4 +44,4 @@ class Handler {
   }
 }
 
-export default Handler;
+export default CommandHandler;
